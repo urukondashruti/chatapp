@@ -5,6 +5,7 @@ import Login from "./pages/login/Login";
 import SignUp from "./pages/signup/SignUp";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./context/AuthContext";
+import { useState, useEffect } from "react";
 
 function Bubbles() {
 	// Generate multiple bubbles with random properties
@@ -34,6 +35,23 @@ function Bubbles() {
 
 function App() {
 	const { authUser } = useAuthContext();
+	const [loading, setLoading] = useState(true);
+
+	// Simulate authentication check delay
+	useEffect(() => {
+		setTimeout(() => {
+			setLoading(false);
+		}, 1000); // Simulate a delay of 1s
+	}, []);
+
+	if (loading) {
+		return (
+			<div className='flex items-center justify-center h-screen'>
+				<div className='animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500'></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className='p-4 h-screen flex items-center justify-center relative'>
 			<Bubbles /> {/* Floating Bubbles Effect */}
