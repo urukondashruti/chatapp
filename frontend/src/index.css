@@ -2,58 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Background Image */
 body {
 	background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("/background.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
+	overflow: hidden;
 }
 
-/* dark mode looking scrollbar */
-::-webkit-scrollbar {
-	width: 8px;
+/* Bubbles Container */
+.bubbles {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	pointer-events: none;
 }
 
-::-webkit-scrollbar-track {
-	background: #555;
+/* Bubble Style */
+.bubble {
+	position: absolute;
+	bottom: -100px;
+	width: 40px;
+	height: 40px;
+	background: rgba(255, 255, 255, 0.2);
+	border-radius: 50%;
+	animation: float 8s infinite linear;
 }
 
-::-webkit-scrollbar-thumb {
-	background: #121212;
-	border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: #242424;
-}
-
-/* SHAKE ANIMATION ON HORIZONTAL DIRECTION */
-.shake {
-	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.2s both;
-	transform: translate3d(0, 0, 0);
-	backface-visibility: hidden;
-	perspective: 1000px;
-}
-
-@keyframes shake {
-	10%,
-	90% {
-		transform: translate3d(-1px, 0, 0);
+/* Animation for floating bubbles */
+@keyframes float {
+	0% {
+		transform: translateY(0) scale(1);
+		opacity: 0.5;
 	}
-
-	20%,
-	80% {
-		transform: translate3d(2px, 0, 0);
+	50% {
+		opacity: 1;
 	}
-
-	30%,
-	50%,
-	70% {
-		transform: translate3d(-4px, 0, 0);
-	}
-
-	40%,
-	60% {
-		transform: translate3d(4px, 0, 0);
+	100% {
+		transform: translateY(-100vh) scale(1.5);
+		opacity: 0;
 	}
 }
